@@ -3,22 +3,22 @@ import connectDB from './DB/index.js';
 import app from './app.js';
 import registration from "./routes/registration.js";
 import login from "./routes/login.js";
-import imageRoutes from './routes/imageRoutes.js'; // Import the image routes
+import pgRoutes from './routes/pgRoutes.js'; // Import the image routes
+
 
 dotenv.config({ path: './env' });
 
-// Define a health check route
-// app.get('/api/users/register', (req, res) => {
-//     console.log('hit')
-//     res.status(200).json({ message: 'Server is up and running!' });
-// });
+// Health check route to ensure the server and DB are working
+
+// Define other routes
 app.use('/api/users', registration);
 app.use('/api/users', login);
-app.use('/api/images', imageRoutes); // Use the image upload routes
+app.use('/api', pgRoutes); // Use the image upload routes
+
 
 connectDB().then(() => {
     app.listen(process.env.port, () => {
-        console.log(`server is running on port ${process.env.port}`);
+        console.log(`server is running on port ${process.env.PORT}`);
     });
 }).catch((error) => {
     console.log('MongoDB connection failed', error);

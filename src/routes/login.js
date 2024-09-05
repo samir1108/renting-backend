@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
         // Validate password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid contact number or password' });
+            return res.status(400).json({ message: 'Invalid  password' });
         }
 
         // If valid, respond with a success message or a token
